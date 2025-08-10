@@ -146,9 +146,12 @@ year?: number; // Optional field
 Setup Instructions
 Install dependencies:
 
-bash
+##bash
+
 npm install axios typescript @types/node
+
 Run the project:
 
-bash
+##bash
+
 npm run dev
