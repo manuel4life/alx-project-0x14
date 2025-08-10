@@ -55,7 +55,11 @@ const Movies: React.FC<MProps> = () => {
             className="border-2 w-full md:w-96 border-[#E2D609] outline-none bg-transparent px-4 py-2 rounded-full text-white placeholder-gray-400"
           />
 
+          <label htmlFor="year-select" className="sr-only">
+            Select Year
+          </label>
           <select
+            id="year-select"
             onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
               setYear(Number(event.target.value))
             }
@@ -78,11 +82,9 @@ const Movies: React.FC<MProps> = () => {
           <div className="flex flex-wrap space-x-0 md:space-x-4 mt-4 md:mt-0">
             {["All", "Animation", "Comedy", "Fantasy"].map(
               (genre: string, key: number) => (
-                <Button
-                  title={genre}
-                  key={key}
-                  action={() => setGenre(genre)}
-                />
+                <Button key={key} onClick={() => setGenre(genre)}>
+                  {genre}
+                </Button>
               )
             )}
           </div>
@@ -99,15 +101,13 @@ const Movies: React.FC<MProps> = () => {
             />
           ))}
         </div>
-        <div className="flex justify-end space-x-4 mt-6">
-          <Button
-            title="Previous"
-            action={() => setPage((prev) => (prev > 1 ? prev - 1 : 1))}
-          />
-          <Button title="Next" action={() => setPage(page + 1)} />
-        </div>
+        <Button onClick={() => setPage((prev) => (prev > 1 ? prev - 1 : 1))}>
+          Previous
+        </Button>
+        <Button onClick={() => setPage(page + 1)}>Next</Button>
+        <Button onClick={() => setPage(page + 1)}>Next</Button>
+        {loading && <Loading />}
       </div>
-      {loading && <Loading />}
     </div>
   );
 };
