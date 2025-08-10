@@ -81,3 +81,74 @@ json
   "genres": ["Drama"]
 }
 ```
+
+## Error Handling
+
+Code Meaning Solution
+401 Unauthorized Check API key
+404 Not Found Verify title ID
+429 Too Many Requests Wait 1 hour
+Error Response:
+
+json
+{
+"error": "Title not found",
+"status": 404
+}
+
+## Usage Limits and Best Practices
+
+Usage Limits and Best Practices
+Rate Limits
+Tier Requests
+Free 100/hour
+Paid 10,000/hour
+Best Practices
+✅ Cache API responses
+
+typescript
+// Example: Cache for 1 hour
+import { cache } from 'react';
+export const getMovie = cache(fetchMovie);
+✅ Implement pagination
+
+http
+GET /titles?limit=20&page=2
+✅ Handle errors gracefully
+
+typescript
+try {
+const data = await fetchMovie("tt123");
+} catch (error) {
+if (error.status === 429) {
+await new Promise(resolve => setTimeout(resolve, 2000)); // Retry after delay
+}
+}
+❌ Never expose API keys
+
+env
+
+# GOOD (in .env):
+
+MOVIESDB_API_KEY=your_key
+
+# BAD (in code):
+
+const apiKey = "123abc";
+✅ Validate responses
+
+typescript
+interface Movie {
+id: string;
+title: string;
+year?: number; // Optional field
+}
+Setup Instructions
+Install dependencies:
+
+bash
+npm install axios typescript @types/node
+Run the project:
+
+bash
+npm run dev
