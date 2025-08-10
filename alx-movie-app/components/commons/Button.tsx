@@ -1,8 +1,23 @@
-const Button: React.FC = () => {
+import React from "react";
+
+interface ButtonProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+  className?: string;
+}
+
+const Button: React.FC<ButtonProps> = ({
+  children,
+  onClick,
+  className = "",
+}) => {
   return (
-    <div>
-      <h1>button</h1>
-    </div>
+    <button
+      onClick={onClick}
+      className={`px-4 py-2 rounded-md bg-blue-600 text-white ${className}`}
+    >
+      {children}
+    </button>
   );
 };
 
